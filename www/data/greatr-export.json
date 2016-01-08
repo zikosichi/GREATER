@@ -1,0 +1,107 @@
+{
+  "bank" : [ {
+    "questions" : [ {
+      "opt1" : {
+        "text" : "54",
+        "value" : 54
+      },
+      "opt2" : {
+        "text" : "34",
+        "value" : 34
+      }
+    }, {
+      "opt1" : {
+        "text" : "25",
+        "value" : 25
+      },
+      "opt2" : {
+        "text" : "43",
+        "value" : 43
+      }
+    }, {
+      "opt1" : {
+        "text" : "59",
+        "value" : 59
+      },
+      "opt2" : {
+        "text" : "60",
+        "value" : 60
+      }
+    }, {
+      "opt1" : {
+        "text" : "9524",
+        "value" : 9524
+      },
+      "opt2" : {
+        "text" : "9542",
+        "value" : 9542
+      }
+    } ],
+    "type" : "numbers"
+  }, {
+    "questions" : [ {
+      "opt1" : {
+        "text" : "IX",
+        "value" : 9
+      },
+      "opt2" : {
+        "text" : "8",
+        "value" : 8
+      }
+    }, {
+      "opt1" : {
+        "text" : "XXIV",
+        "value" : 25
+      },
+      "opt2" : {
+        "text" : "XVII",
+        "value" : 17
+      }
+    }, {
+      "opt1" : {
+        "text" : "V",
+        "value" : 5
+      },
+      "opt2" : {
+        "text" : "X",
+        "value" : 9
+      }
+    }, {
+      "opt1" : {
+        "text" : "VIII",
+        "value" : 8
+      },
+      "opt2" : {
+        "text" : "IX",
+        "value" : 9
+      }
+    } ],
+    "type" : "romans"
+  } ],
+  "levels" : [
+    {
+      "id" : 1,
+      "name" : "Level 1",
+      "questionsFrom" : [ "numbers", "romans" ],
+      "maxScore" : 25,
+      "currentScore" : 0,
+      "scoreRange" : [0,25]
+    },
+    {
+      "id" : 2,
+      "name" : "Level 2",
+      "questionsFrom" : [ "numbers", "romans" ],
+      "maxScore" : 25,
+      "currentScore" : 0,
+      "scoreRange" : [26,50]
+    },
+    {
+      "id" : 3,
+      "name" : "Level 3",
+      "questionsFrom" : [ "numbers", "romans" ],
+      "maxScore" : 25,
+      "currentScore" : 0,
+      "scoreRange" : [51,100]
+    }
+  ]
+}

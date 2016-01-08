@@ -1,0 +1,12 @@
+{
+  "name": "GREATER",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "compass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
