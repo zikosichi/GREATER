@@ -37,8 +37,12 @@ function($http, $firebaseArray, $q, Storage){
 			return _.shuffle(levelQuestions);
 		},
 		unlockLevel: function(level){
+			level.unlocked = "unlocked";
+			this._updateLevel(level);
+		},
+		completeLevel: function(level){
 			level.currentScore = level.maxScore;
-			level.unlocked = true;
+			level.status = "completed";
 			this._updateLevel(level);
 		},
 		updateLevelProgress: function(level){

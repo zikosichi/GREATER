@@ -385,7 +385,7 @@ angular.module('angular-svg-round-progress')
                         if(!isNested){
                             // note that we can't use .attr, because if jQuery is loaded,
                             // it lowercases all attributes and viewBox is case-sensitive
-                            svg[0].setAttribute('viewBox', '0 0 ' + diameter + ' ' + (isSemicircle ? radius : diameter));
+                            svg[0].setAttribute('viewBox', '0 0 ' + diameter  + ' ' + (isSemicircle ? radius : diameter));
 
                             element.css({
                                 "width":            responsive ? "100%" : "auto",
@@ -402,7 +402,7 @@ angular.module('angular-svg-round-progress')
 
                         ring.css({
                             "stroke":           service.resolveColor(options.color),
-                            "stroke-width":     stroke,
+                            "stroke-width":     stroke + 7,
                             "stroke-linecap":   options.rounded ? "round": "butt"
                         });
 

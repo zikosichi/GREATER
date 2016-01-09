@@ -9,20 +9,21 @@
 		<ion-slides options="levelsSliderOptionsa" slider="slider" class="levels-slider">
 			<ion-slide-page ng-repeat="level in levels" class="level-slide" test="arg">
 				<div class="progress ng-cloak">
-					<h2> {{level.name}} </h2>
-					<p> {{level.currentScore}}/{{level.maxScore}} </p>
+					<div ng-if="level.status == 'unlocked'">
+						<h2> {{level.name}} </h2>
+						<p> {{level.currentScore}}/{{level.maxScore}} </p>
+					</div>
+					<div ng-if="level.status == 'locked'" style="margin-top:-25px">
+						<i class="ion-android-lock"></i>
+					</div>
 				</div>
 				<div
 					round-progress
-					max="100"
-					current="levelProgress"
-					color="#98db39"
-					bgcolor="#eaeaea"
-					stroke="15"
-					semi="false"
-					rounded="false"
-					clockwise="true"
-					responsive="false"
+					max="level.maxScore"
+					current="level.currentScore"
+					color="#81D4FA"
+					bgcolor="#FFF"
+					stroke="10"
 					duration="800"
 					animation="easeInOutQuart">
 				</div>

@@ -85,7 +85,7 @@
       "questionsFrom" : [ "numbers", "romans" ],
       "maxScore" : 25,
       "currentScore" : 0,
-      "unlocked" : false
+      "status" : "unlocked"
     },
     {
       "id" : 2,
@@ -93,7 +93,7 @@
       "questionsFrom" : [ "numbers", "romans" ],
       "maxScore" : 25,
       "currentScore" : 0,
-      "unlocked" : false
+      "status" : "locked"
     },
     {
       "id" : 3,
@@ -101,7 +101,7 @@
       "questionsFrom" : [ "numbers", "romans" ],
       "maxScore" : 25,
       "currentScore" : 0,
-      "unlocked" : false
+      "status" : "locked"
     }
   ]
 }
