@@ -22,12 +22,12 @@ function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 		.state('menu', {
 			url: '/menu',
 			templateUrl: 'app/game/menu.html',
-			controller: 'menuController',
+			controller: 'menuController as vm',
 		})
 		.state('gameboard', {
-			url: '/gameboard',
+			url: '/gameboard/:levelId',
 			templateUrl: 'app/game/gameboard.html',
-			controller: 'gameController',
+			controller: 'gameController as vm',
 			cache: false
 		});
 

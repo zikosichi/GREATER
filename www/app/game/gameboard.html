@@ -1,12 +1,12 @@
 <div class="wrapper">
 
-	<div class="block light" id="block-up" ng-click="selectOpt(currentQuestion.opt1.value, currentQuestion.opt2.value, 'block-up')">
-		<p>{{currentQuestion.opt1.text}}</p>
+	<div class="block block-flex light" id="block-0" ng-click="selectOpt(0)">
+		<p> {{vm.currentQuestion[0].text}}</p>
 		<div class="timer" id="preloader"></div>
 	</div>
 
-	<div class="block" id="block-down" ng-click="selectOpt(currentQuestion.opt2.value, currentQuestion.opt1.value, 'block-down')">
-		<p>{{currentQuestion.opt2.text}}</p>
+	<div class="block block-flex" id="block-1" ng-click="selectOpt(1)">
+		<p>{{vm.currentQuestion[1].text}}</p>
 	</div>
 
 </div>

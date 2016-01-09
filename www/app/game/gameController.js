@@ -1,60 +1,80 @@
-app.controller('gameController', ['$scope', 'Level', '$timeout', '$state',
-function($scope, Level, $timeout, $state){
-	
-	Level.loadData().then(function(){
-		levelQuestions = Level.generateLevel("level1");
-		initGame();
-	});
+app.controller('gameController', ['$scope', 'Level', '$timeout', '$state', '$stateParams', 'Game',
+function($scope, Level, $timeout, $state, $stateParams, Game){
 
-	//Setting variables
-	$scope.currentQuestion = {};
-	var levelQuestions = [],
-		i = 0,
-		preloader = document.getElementById("preloader"),
-		timerAnimation = null,
-		levelScore = 0;
-	
-	//Initialize game
-	function initGame(){
-		playQuestion();
+	var self = this;
+
+	/**** GAMEPLAY OBJECT ****/
+	function GamePlay(){
+		this.questionIndex  = 0;
+		this.preloader      = document.getElementById("preloader");
+		this.timerAnimation = null;
+		this.levelScore     = 0;
+		this.levelQuestions = [];
+
+		var l = _.find(Game.levels, 'id', parseInt($stateParams.levelId));
+		this.levelQuestions = Game.generateLevelQuestions(l);
+
+		self.currentQuestion = {};
 	}
 
-	//Play current question preloader
-	function playQuestion(){
-
-		TweenMax.set(preloader, {width: "0%"});
-		timerAnimation = TweenMax.to(preloader, 5, {width: "100%", onComplete:gameOver});
-
-		$scope.currentQuestion = levelQuestions[i];
-	}
-
-	//Go to next question
-	function nextQuestion(){
-		i++;
-		playQuestion();
-	}
-
-	//Game over
-	function gameOver(){
-		TweenMax.set(preloader, {width: "0%"});
-		timerAnimation.kill();
-		$state.go('menu');
-		Level.currentLevelScore = levelScore;
-	}
-
-	//Answer qeustion
-	$scope.selectOpt = function(clicked, notclicked, blockId){
-
-		if (clicked > notclicked) {
-			TweenMax.from('#' + blockId, 0.3, {backgroundColor: '#bedb39'});
-			nextQuestion();
-			levelScore ++;
-		}else{
-			TweenMax.from('#' + blockId, 0.3, {backgroundColor: '#da4d4d'});
-			gameOver();
-		}
+	// START GAME
+	GamePlay.prototype.startGame = function(){
+		this.playQuestion();
 	};
 
+	// PLAY CURRENT QUESTION
+	GamePlay.prototype.playQuestion = function(){
+		_this = this;
+		TweenMax.set(preloader, {width: "0%"});
+		this.timerAnimation = TweenMax.to(preloader, 4, {width: "100%", onComplete:function(){
+			_this.gameOver();
+			$scope.$digest();
+		}});
+		self.currentQuestion = this.levelQuestions[this.questionIndex];
+	};
+
+	// NEXT QUESTION
+	GamePlay.prototype.nextQuestion = function(){
+		this.questionIndex++;
+		this.playQuestion();
+	};
+
+	// GAME OVER
+	GamePlay.prototype.gameOver = function(){
+		TweenMax.set(preloader, {width: "0%"});
+		if (this.timerAnimation) {
+			this.timerAnimation.kill();
+		}
+		gamePlay = new GamePlay();
+		console.log('GO TO MENU OR ...');
+	};
+
+	// SELEC ANSWER
+	GamePlay.prototype.selectAnswer = function(index){
+		TweenMax.set('#block-' + index, {backgroundColor: 'transparent'});
+		if (self.currentQuestion[index].value > self.currentQuestion[index === 0 ? 1 : 0].value) {
+			this.nextQuestion();
+			TweenMax.from('#block-' + index, 0.3, {backgroundColor: '#bedb39'});
+		}else{
+			this.gameOver();
+			TweenMax.from('#block-' + index, 0.3, {backgroundColor: 'red'});
+		}
+	};
+	/**** GAMEPLAY OBJECT END ****/
+
+
+	// INIT GAME (TEMPORARY)
+	Game.init().then(function(){
+		gamePlay = new GamePlay();
+		gamePlay.playQuestion();
+	}, function(error){
+		console.log(error);
+	});
+
+	// ANSWER QEUSTION
+	$scope.selectOpt = function(index){
+		gamePlay.selectAnswer(index);
+	};
 
 }]);
 

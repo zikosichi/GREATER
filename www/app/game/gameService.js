@@ -15,7 +15,7 @@ function($http, $firebaseArray, $q, Storage){
 				self.questionsBank = response.data.bank;
 
 				// Find initial level
-				var index = _.findLastIndex(self.levels, 'unlocked', true);
+				var index = _.findLastIndex(self.levels, 'status', 'unlocked');
 				self.initialLevelIndex = index == -1 ? 0 : index;
 				deferred.resolve(response);
 			}, function(error){

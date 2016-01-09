@@ -1,13 +1,13 @@
 <div class="wrapper">
 
-	<div class="block block-flex light" ng-click="startGame()">
+	<div class="block block-flex light" ng-click="vm.startGame()">
 		<p>Play</p>
 	</div>
 
 	<div class="block flex-block">
 
 		<ion-slides options="levelsSliderOptionsa" slider="slider" class="levels-slider">
-			<ion-slide-page ng-repeat="level in levels" class="level-slide" test="arg">
+			<ion-slide-page ng-repeat="level in vm.levels" class="level-slide" test="arg">
 				<div class="progress ng-cloak">
 					<div ng-if="level.status == 'unlocked'">
 						<h2> {{level.name}} </h2>
