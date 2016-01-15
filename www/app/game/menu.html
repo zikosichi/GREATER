@@ -9,7 +9,7 @@
 		<ion-slides options="levelsSliderOptionsa" slider="slider" class="levels-slider">
 			<ion-slide-page ng-repeat="level in vm.levels" class="level-slide" test="arg">
 				<div class="progress ng-cloak">
-					<div ng-if="level.status == 'unlocked'">
+					<div ng-if="level.status != 'locked'">
 						<h2> {{level.name}} </h2>
 						<p> {{level.currentScore}}/{{level.maxScore}} </p>
 					</div>

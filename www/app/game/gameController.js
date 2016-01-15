@@ -1,5 +1,5 @@
-app.controller('gameController', ['$scope', 'Level', '$timeout', '$state', '$stateParams', 'Game',
-function($scope, Level, $timeout, $state, $stateParams, Game){
+app.controller('gameController', ['$scope', '$timeout', '$state', '$stateParams', 'Game', 'Storage',
+function($scope, $timeout, $state, $stateParams, Game, Storage){
 
 	var self = this;
 
@@ -8,11 +8,10 @@ function($scope, Level, $timeout, $state, $stateParams, Game){
 		this.questionIndex  = 0;
 		this.preloader      = document.getElementById("preloader");
 		this.timerAnimation = null;
-		this.levelScore     = 0;
+		this.currentScore     = 0;
 		this.levelQuestions = [];
-
-		var l = _.find(Game.levels, 'id', parseInt($stateParams.levelId));
-		this.levelQuestions = Game.generateLevelQuestions(l);
+		this.level = _.find(Game.levels, 'id', parseInt($stateParams.levelId));
+		this.levelQuestions = Game.generateLevelQuestions(this.level);
 
 		self.currentQuestion = {};
 	}
@@ -31,12 +30,20 @@ function($scope, Level, $timeout, $state, $stateParams, Game){
 			$scope.$digest();
 		}});
 		self.currentQuestion = this.levelQuestions[this.questionIndex];
+		if (Math.random() < 0.5) {
+			// SUFFLE ANSWERS
+			self.currentQuestion[0] = self.currentQuestion.splice(1, 1, self.currentQuestion[0])[0];
+		}
 	};
 
 	// NEXT QUESTION
 	GamePlay.prototype.nextQuestion = function(){
-		this.questionIndex++;
-		this.playQuestion();
+		if (this.questionIndex < this.levelQuestions.length - 1) {
+			this.questionIndex++;
+			this.playQuestion();
+		}else{
+			this.gameOver();
+		}
 	};
 
 	// GAME OVER
@@ -45,14 +52,18 @@ function($scope, Level, $timeout, $state, $stateParams, Game){
 		if (this.timerAnimation) {
 			this.timerAnimation.kill();
 		}
-		gamePlay = new GamePlay();
-		console.log('GO TO MENU OR ...');
+		
+		console.log('GAME OVER');
+		Game.setEarnedScore(this.level.id, this.currentScore);
+		$state.go("menu");
 	};
 
 	// SELEC ANSWER
 	GamePlay.prototype.selectAnswer = function(index){
-		TweenMax.set('#block-' + index, {backgroundColor: 'transparent'});
+		TweenMax.set('#block-0' + index, {backgroundColor: 'rgba(255,255,255,0.07)'});
+		TweenMax.set('#block-1' + index, {backgroundColor: 'transparent'});
 		if (self.currentQuestion[index].value > self.currentQuestion[index === 0 ? 1 : 0].value) {
+			this.currentScore ++;
 			this.nextQuestion();
 			TweenMax.from('#block-' + index, 0.3, {backgroundColor: '#bedb39'});
 		}else{

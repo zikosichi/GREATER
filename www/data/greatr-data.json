@@ -1,5 +1,50 @@
 {
   "bank" : [ {
+    "questions" :
+      [ 
+        [
+          {
+            "text" : "10",
+            "value" : 10
+          },
+          {
+            "text" : "20",
+            "value" : 20
+          }
+        ],
+        [
+          {
+            "text" : "10",
+            "value" : 10
+          },
+          {
+            "text" : "20",
+            "value" : 20
+          }
+        ],
+        [
+          {
+            "text" : "10",
+            "value" : 10
+          },
+          {
+            "text" : "20",
+            "value" : 20
+          }
+        ],
+        [
+          {
+            "text" : "10",
+            "value" : 10
+          },
+          {
+            "text" : "20",
+            "value" : 20
+          }
+        ]
+      ],
+      "type" : "test"
+    }, {
     "questions" : [ [
       {
         "text" : "54",
@@ -9,36 +54,36 @@
         "text" : "34",
         "value" : 34
       }
-    ], [
-      {
-        "text" : "25",
-        "value" : 25
-      },
-      {
-        "text" : "43",
-        "value" : 43
-      }
-    ], [
-      {
-        "text" : "59",
-        "value" : 59
-      },
-      {
-        "text" : "60",
-        "value" : 60
-      }
-    ], [
-      {
-        "text" : "9524",
-        "value" : 9524
-      },
-      {
-        "text" : "9542",
-        "value" : 9542
-      }
-    ] ],
-    "type" : "numbers"
-  }, {
+      ], [
+        {
+          "text" : "25",
+          "value" : 25
+        },
+        {
+          "text" : "43",
+          "value" : 43
+        }
+      ], [
+        {
+          "text" : "59",
+          "value" : 59
+        },
+        {
+          "text" : "60",
+          "value" : 60
+        }
+      ], [
+        {
+          "text" : "9524",
+          "value" : 9524
+        },
+        {
+          "text" : "9542",
+          "value" : 9542
+        }
+      ] ],
+      "type" : "numbers"
+    }, {
     "questions" : [ [
       {
         "text" : "IX",
@@ -82,16 +127,16 @@
     {
       "id" : 1,
       "name" : "Level 1",
-      "questionsFrom" : [ "numbers", "romans" ],
-      "maxScore" : 25,
+      "questionsFrom" : [ "test" ],
+      "maxScore" : 4,
       "currentScore" : 0,
       "status" : "unlocked"
     },
     {
       "id" : 2,
       "name" : "Level 2",
-      "questionsFrom" : [ "numbers", "romans" ],
-      "maxScore" : 25,
+      "questionsFrom" : [ "romans" ],
+      "maxScore" : 4,
       "currentScore" : 0,
       "status" : "locked"
     },
@@ -99,7 +144,7 @@
       "id" : 3,
       "name" : "Level 3",
       "questionsFrom" : [ "numbers", "romans" ],
-      "maxScore" : 25,
+      "maxScore" : 4,
       "currentScore" : 0,
       "status" : "locked"
     }

@@ -1,10 +1,10 @@
-app.factory('Game', ['$http', '$firebaseArray', '$q', 'Storage',
-function($http, $firebaseArray, $q, Storage){
+app.factory('Game', ['$http', '$q', 'Storage',
+function($http, $q, Storage){
 
 	return {
 		levels: null,
 		questionsBank: null,
-		initialLevelIndex: 0,
+		earnedScore: 0,
 		_levelsProgress: Storage.get('_levelsProgress') || [],
 		init: function(){
 			var deferred = $q.defer();
@@ -14,9 +14,7 @@ function($http, $firebaseArray, $q, Storage){
 				self._updateLevels();
 				self.questionsBank = response.data.bank;
 
-				// Find initial level
-				var index = _.findLastIndex(self.levels, 'status', 'unlocked');
-				self.initialLevelIndex = index == -1 ? 0 : index;
+				// Find initial level				
 				deferred.resolve(response);
 			}, function(error){
 				console.log(error);
@@ -37,18 +35,32 @@ function($http, $firebaseArray, $q, Storage){
 			return _.shuffle(levelQuestions);
 		},
 		unlockLevel: function(level){
-			level.unlocked = "unlocked";
+			level.status = "unlocked";
 			this._updateLevel(level);
 		},
 		completeLevel: function(level){
 			level.currentScore = level.maxScore;
 			level.status = "completed";
 			this._updateLevel(level);
+			this.clearEarnedScore();
 		},
 		updateLevelProgress: function(level){
 			this._updateLevel(level);
+			this.clearEarnedScore();
 		},
-		//Update date from localstorage
+		setEarnedScore: function(levelId, score){
+			Storage.put("earnedScore", {
+				levelId : levelId,
+				score: score
+			});
+		},
+		getEarnedScore: function(){
+			return Storage.get("earnedScore");
+		},
+		clearEarnedScore: function(){
+			Storage.remove("earnedScore");
+		},
+		// UPDATE DATE FROM LOCALSTORAGE
 		_updateLevel: function(level){
 			var self = this;
 			index = _.findIndex(self._levelsProgress, 'id', level.id);
@@ -68,11 +80,10 @@ function($http, $firebaseArray, $q, Storage){
 		},
 		_updateLevels: function(){
 			self = this;
-			var index;
 			for (var i = 0; i < self._levelsProgress.length; i++) {
-				index = _.findIndex(self.levels, 'id', self._levelsProgress[i].id);
-				self.levels[index].currentScore = self._levelsProgress[i].currentScore;
-				self.levels[index].unlocked     = self._levelsProgress[i].unlocked;
+				var index = _.findIndex(self.levels, 'id', self._levelsProgress[i].id);
+				angular.extend(self.levels[index], self._levelsProgress[i]);
+				// self.levels[index].currentScore = self._levelsProgress[i].currentScore;
 			}
 
 		}
