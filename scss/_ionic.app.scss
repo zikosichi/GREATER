@@ -15,6 +15,10 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$font-family-sans-serif:          'qanelas_soft_demoextrabold', '-apple-system', "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
+
+$font-family-light-sans-serif:    'qanelas_soft_demoultralight', '-apple-system', "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 

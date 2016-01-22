@@ -65,7 +65,7 @@ $timer : #ffc73c;
 			-webkit-transform: translateY(-50%) translateX(-50%);
 			h2{
 				color: #fff;
-				font-weight: 200;
+				// font-weight: 200;
 				font-size: 28px
 			}
 			p{
@@ -81,15 +81,40 @@ $timer : #ffc73c;
 
 
 /* GAMEBOARD */
-.timer{
-	position: absolute;
-	bottom: -2px;
-	z-index: 10;
-	left: 0;
-	width: 0%;
-	height: 4px;
-	background: $timer;
+.gameboard{
+	.block p{
+		font-size: 68px;
+	}
+
+	.timer{
+		position: absolute;
+		bottom: -2px;
+		z-index: 10;
+		left: 0;
+		width: 0%;
+		height: 4px;
+		background: $timer;
+	}
+
+	.ripple-content{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 200px;
+		height: 200px;
+		z-index: 2;
+		pointer-events: none;
+		.ripple-obj{
+			svg{
+				// fill:red;
+			}
+			width: 100%;
+			height: 100%;
+		}
+	}
+	
 }
+
 
 
 
