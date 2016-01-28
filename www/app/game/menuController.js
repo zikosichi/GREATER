@@ -36,7 +36,11 @@ function($scope, $state, $timeout, roundProgressService, Game){
 					initialLevelIndex = index == -1 ? 0 : index;
 
 				self.swiper = swiper;
-				self.swiper.slideTo(initialLevelIndex, 1);
+
+				//TIMEOUT IS TEMPORARY - WHILE USING FIREBASE
+				$timeout(function(){
+					self.swiper.slideTo(initialLevelIndex, 1);					
+				}, 100);
 			}
 		});
 	}

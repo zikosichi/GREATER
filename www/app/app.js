@@ -1,4 +1,4 @@
-var app = angular.module('greatr', ['ionic', 'angular-svg-round-progress'])
+var app = angular.module('greatr', ['ionic', 'angular-svg-round-progress', 'firebase'])
 
 .run(['$ionicPlatform', function($ionicPlatform) {
 	$ionicPlatform.ready(function() {

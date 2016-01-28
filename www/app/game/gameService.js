@@ -1,33 +1,47 @@
-app.factory('Game', ['$http', '$q', 'Storage',
-function($http, $q, Storage){
-
+app.factory('Game', ['$http', '$q', 'Storage', '$firebaseObject',
+function($http, $q, Storage, $firebaseObject){
 	return {
 		levels: null,
 		questionsBank: null,
 		earnedScore: 0,
 		_levelsProgress: Storage.get('_levelsProgress') || [],
 		init: function(){
-			var deferred = $q.defer();
-			var self = this;
-			self._loadData().then(function(response){
-				self.levels = response.data.levels;
-				self._updateLevels();
-				self.questionsBank = response.data.bank;
 
-				// Find initial level				
-				deferred.resolve(response);
-			}, function(error){
-				console.log(error);
-				deferred.resolve(error);
+			var self = this;
+			self._loadData();
+			var deferred = $q.defer();
+			var ref = new Firebase("https://greatr.firebaseio.com/");
+			data = $firebaseObject(ref);
+
+			data.$loaded().then(function(){
+				self.levels = data.levels.levels;
+				self._updateLevels();
+				self.questionsBank = data.bank.types;
+
+				deferred.resolve(data);
 			});
 			return deferred.promise;
+
+			/*var deferred = $q.defer();
+			var self = this;
+			self._loadData().then(function(response){
+
+				self.levels = response.data.levels.levels;
+				self._updateLevels();
+				self.questionsBank = response.data.bank.types;
+
+				deferred.resolve(response);
+			}, function(error){
+				deferred.resolve(error);
+			});
+			return deferred.promise;*/
 		},
 		generateLevelQuestions: function(level){
 			var self = this;
 			var levelQuestions = [];
 			for (var i = 0; i < level.questionsFrom.length; i++) {
 				for (var j = 0; j < self.questionsBank.length; j++) {
-					if (level.questionsFrom[i] == self.questionsBank[j].type ) {
+					if (level.questionsFrom[i].text == self.questionsBank[j].type ) {
 						levelQuestions = levelQuestions.concat(self.questionsBank[j].questions);
 					}
 				}

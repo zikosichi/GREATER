@@ -1,152 +1,79 @@
 {
-  "bank" : [ {
-    "questions" :
-      [ 
-        [
-          {
-            "text" : "10",
-            "value" : 10
-          },
-          {
-            "text" : "20",
-            "value" : 20
-          }
-        ],
-        [
-          {
-            "text" : "10",
-            "value" : 10
-          },
-          {
-            "text" : "20",
-            "value" : 20
-          }
-        ],
-        [
-          {
-            "text" : "10",
-            "value" : 10
-          },
-          {
-            "text" : "20",
-            "value" : 20
-          }
-        ],
-        [
-          {
-            "text" : "10",
-            "value" : 10
-          },
-          {
-            "text" : "20",
-            "value" : 20
-          }
-        ]
-      ],
-      "type" : "test"
+  "bank" : {
+    "types" : [ {
+      "questions" : [ [ {
+        "text" : "5",
+        "value" : "5"
+      }, {
+        "text" : "10",
+        "value" : "10"
+      } ], [ {
+        "text" : "11",
+        "value" : "11"
+      }, {
+        "text" : "12",
+        "value" : "12"
+      } ], [ {
+        "text" : "2",
+        "value" : "2"
+      }, {
+        "text" : "3",
+        "value" : "3"
+      } ] ],
+      "type" : "Numbers"
     }, {
-    "questions" : [ [
-      {
-        "text" : "54",
-        "value" : 54
-      },
-      {
-        "text" : "34",
-        "value" : 34
-      }
-      ], [
-        {
-          "text" : "25",
-          "value" : 25
-        },
-        {
-          "text" : "43",
-          "value" : 43
-        }
-      ], [
-        {
-          "text" : "59",
-          "value" : 59
-        },
-        {
-          "text" : "60",
-          "value" : 60
-        }
-      ], [
-        {
-          "text" : "9524",
-          "value" : 9524
-        },
-        {
-          "text" : "9542",
-          "value" : 9542
-        }
-      ] ],
-      "type" : "numbers"
-    }, {
-    "questions" : [ [
-      {
-        "text" : "IX",
-        "value" : 9
-      },
-      {
-        "text" : "8",
-        "value" : 8
-      }
-    ], [
-      {
-        "text" : "XXIV",
-        "value" : 25
-      },
-      {
-        "text" : "XVII",
-        "value" : 17
-      }
-    ], [
-      {
+      "questions" : [ [ {
+        "text" : "III",
+        "value" : "3"
+      }, {
         "text" : "V",
-        "value" : 5
-      },
-      {
+        "value" : "5"
+      } ], [ {
         "text" : "X",
-        "value" : 9
-      }
-    ], [
-      {
-        "text" : "VIII",
-        "value" : 8
-      },
-      {
+        "value" : "10"
+      }, {
         "text" : "IX",
-        "value" : 9
-      }
-    ] ],
-    "type" : "romans"
-  } ],
-  "levels" : [
-    {
+        "value" : "9"
+      } ], [ {
+        "text" : "XIV",
+        "value" : "14"
+      }, {
+        "text" : "XVI",
+        "value" : "16"
+      } ] ],
+      "type" : "Romans"
+    } ]
+  },
+  "levels" : {
+    "levels" : [ {
+      "currentScore" : 0,
       "id" : 1,
+      "maxScore" : 25,
       "name" : "Level 1",
-      "questionsFrom" : [ "test" ],
-      "maxScore" : 4,
-      "currentScore" : 0,
+      "questionsFrom" : [ {
+        "text" : "Numbers"
+      } ],
       "status" : "unlocked"
-    },
-    {
+    }, {
+      "currentScore" : 0,
       "id" : 2,
+      "maxScore" : "25",
       "name" : "Level 2",
-      "questionsFrom" : [ "romans" ],
-      "maxScore" : 4,
-      "currentScore" : 0,
+      "questionsFrom" : [ {
+        "text" : "Romans"
+      } ],
       "status" : "locked"
-    },
-    {
+    }, {
+      "currentScore" : 0,
       "id" : 3,
+      "maxScore" : "50",
       "name" : "Level 3",
-      "questionsFrom" : [ "numbers", "romans" ],
-      "maxScore" : 4,
-      "currentScore" : 0,
+      "questionsFrom" : [ {
+        "text" : "Numbers"
+      }, {
+        "text" : "Romans"
+      } ],
       "status" : "locked"
-    }
-  ]
+    } ]
+  }
 }

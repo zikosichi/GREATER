@@ -49,21 +49,22 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture){
 
 	// GAME OVER
 	GamePlay.prototype.gameOver = function(){
-		/*TweenMax.set(preloader, {width: "0%"});
+		TweenMax.set(preloader, {width: "0%"});
 		if (this.timerAnimation) {
 			this.timerAnimation.kill();
 		}
 		
 		console.log('GAME OVER');
 		Game.setEarnedScore(this.level.id, this.currentScore);
-		$state.go("menu");*/
+		$state.go("menu");
 	};
 
 	// SELEC ANSWER
 	GamePlay.prototype.selectAnswer = function(index, event){
 		TweenMax.set('#block-0' + index, {backgroundColor: 'rgba(255,255,255,0.07)'});
 		TweenMax.set('#block-1' + index, {backgroundColor: 'transparent'});
-		if (self.currentQuestion[index].value > self.currentQuestion[index === 0 ? 1 : 0].value) {
+
+		if (parseInt(self.currentQuestion[index].value) > parseInt(self.currentQuestion[index === 0 ? 1 : 0].value)) {
 			this.currentScore ++;
 			this.nextQuestion();
 			gamePlay.rippleAnimation(event.pageX, event.pageY, 0.5, 60, "#bedb39");
