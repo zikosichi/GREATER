@@ -2,17 +2,173 @@
   "bank" : {
     "types" : [ {
       "questions" : [ [ {
+        "text" : "00",
+        "value" : 0
+      }, {
+        "text" : "-01",
+        "value" : "-1"
+      } ], [ {
+        "text" : "63",
+        "value" : "63"
+      }, {
+        "text" : "36",
+        "value" : "36"
+      } ], [ {
+        "text" : "89",
+        "value" : "89"
+      }, {
+        "text" : "91",
+        "value" : "91"
+      } ], [ {
+        "text" : "12",
+        "value" : "12"
+      }, {
+        "text" : "11",
+        "value" : "11"
+      } ], [ {
+        "text" : "100",
+        "value" : "100"
+      }, {
+        "text" : "1000",
+        "value" : "1000"
+      } ], [ {
+        "text" : "0",
+        "value" : 0
+      }, {
+        "text" : "-1",
+        "value" : "-1"
+      } ], [ {
+        "text" : "00",
+        "value" : 0
+      }, {
+        "text" : "01",
+        "value" : "1"
+      } ], [ {
+        "text" : "99",
+        "value" : "99"
+      }, {
+        "text" : "101",
+        "value" : "101"
+      } ], [ {
+        "text" : "9999",
+        "value" : "9999"
+      }, {
+        "text" : "1000",
+        "value" : "1000"
+      } ], [ {
+        "text" : "999",
+        "value" : "999"
+      }, {
+        "text" : "1000",
+        "value" : "1000"
+      } ], [ {
+        "text" : "55",
+        "value" : "55"
+      }, {
+        "text" : "44",
+        "value" : "44"
+      } ], [ {
+        "text" : "66",
+        "value" : "66"
+      }, {
+        "text" : "99",
+        "value" : "99"
+      } ], [ {
+        "text" : "54",
+        "value" : "54"
+      }, {
+        "text" : "45",
+        "value" : "45"
+      } ], [ {
+        "text" : "76",
+        "value" : "76"
+      }, {
+        "text" : "67",
+        "value" : "67"
+      } ], [ {
+        "text" : "47",
+        "value" : "47"
+      }, {
+        "text" : "74",
+        "value" : "74"
+      } ], [ {
         "text" : "5",
         "value" : "5"
       }, {
+        "text" : "004",
+        "value" : "4"
+      } ], [ {
+        "text" : "100",
+        "value" : "100"
+      }, {
+        "text" : "001",
+        "value" : "1"
+      } ], [ {
+        "text" : "999",
+        "value" : "999"
+      }, {
+        "text" : "100",
+        "value" : "100"
+      } ], [ {
+        "text" : "1",
+        "value" : "1"
+      }, {
+        "text" : "-1",
+        "value" : "-1"
+      } ], [ {
+        "text" : "-25",
+        "value" : "-25"
+      }, {
+        "text" : "15",
+        "value" : "15"
+      } ], [ {
+        "text" : "17",
+        "value" : "17"
+      }, {
+        "text" : "-99",
+        "value" : "-99"
+      } ], [ {
+        "text" : "9",
+        "value" : "9"
+      }, {
+        "text" : "8",
+        "value" : "8"
+      } ], [ {
         "text" : "10",
         "value" : "10"
-      } ], [ {
+      }, {
         "text" : "11",
         "value" : "11"
-      }, {
+      } ], [ {
         "text" : "12",
         "value" : "12"
+      }, {
+        "text" : "11",
+        "value" : "11"
+      } ], [ {
+        "text" : "15",
+        "value" : "15"
+      }, {
+        "text" : "25",
+        "value" : "25"
+      } ], [ {
+        "text" : "19",
+        "value" : "19"
+      }, {
+        "text" : "21",
+        "value" : "21"
+      } ], [ {
+        "text" : "1",
+        "value" : "1"
+      }, {
+        "text" : "2",
+        "value" : "2"
+      } ], [ {
+        "text" : "5",
+        "value" : "5"
+      }, {
+        "text" : "4",
+        "value" : "4"
       } ], [ {
         "text" : "2",
         "value" : "2"
@@ -23,6 +179,12 @@
       "type" : "Numbers"
     }, {
       "questions" : [ [ {
+        "text" : "II",
+        "value" : "2"
+      }, {
+        "text" : "IV",
+        "value" : "4"
+      } ], [ {
         "text" : "III",
         "value" : "3"
       }, {
@@ -46,28 +208,37 @@
   },
   "levels" : {
     "levels" : [ {
+      "checkpointInterval" : "5",
+      "color" : "#0D47A1",
       "currentScore" : 0,
       "id" : 1,
       "maxScore" : 25,
       "name" : "Level 1",
+      "questionTime" : "4",
       "questionsFrom" : [ {
         "text" : "Numbers"
       } ],
       "status" : "unlocked"
     }, {
+      "checkpointInterval" : "5",
+      "color" : "#1A237E",
       "currentScore" : 0,
       "id" : 2,
       "maxScore" : "25",
       "name" : "Level 2",
+      "questionTime" : "4",
       "questionsFrom" : [ {
         "text" : "Romans"
       } ],
       "status" : "locked"
     }, {
+      "checkpointInterval" : "10",
+      "color" : "#311B92",
       "currentScore" : 0,
       "id" : 3,
       "maxScore" : "50",
       "name" : "Level 3",
+      "questionTime" : "4",
       "questionsFrom" : [ {
         "text" : "Numbers"
       }, {

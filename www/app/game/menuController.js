@@ -1,10 +1,11 @@
-app.controller('menuController', ['$scope', '$state', '$timeout', 'roundProgressService', 'Game',
-function($scope, $state, $timeout, roundProgressService, Game){
+app.controller('menuController', ['$scope', '$state', '$timeout', 'roundProgressService', 'Game', '$rootScope',
+function($scope, $state, $timeout, roundProgressService, Game, $rootScope){
 
 	var self = this;
 
 	self.levels = [];
 	self.activeLevel = 0;
+	self.progressEase = "easeInOutQuart";
 	
 	// ON ENTER THE MENU FORM
 	$scope.$on( "$ionicView.enter", function( scopes, states ) {
@@ -12,7 +13,7 @@ function($scope, $state, $timeout, roundProgressService, Game){
 			// UPDATE LEVEL SCORE
 			var earnedScore = Game.getEarnedScore();
 			if (earnedScore) {				
-				if (earnedScore.score > 0) {
+				if (earnedScore.score > 0) {					
 					var levelToUpdate = _.find(self.levels, 'id', parseInt(earnedScore.levelId));
 					addScoreToLevel(levelToUpdate, earnedScore.score);
 				}else{
@@ -28,6 +29,7 @@ function($scope, $state, $timeout, roundProgressService, Game){
 	function initGame(){
 		self.levels = Game.levels;
 		self.activeLevel = self.levels[0];
+		$rootScope.bgColor = self.activeLevel.color;
 
 		$scope.$watch('slider', function(swiper) {
 			if (swiper) {
@@ -49,7 +51,15 @@ function($scope, $state, $timeout, roundProgressService, Game){
 		if ( level.currentScore + score < level.maxScore) {
 			// UPDATE LEVEL
 			level.currentScore += score;
-			Game.updateLevelProgress(level);			
+			$timeout(function(){
+				self.progressEase = "easeOutBounce";
+				level.currentScore -= score % level.checkpointInterval;
+				Game.updateLevelProgress(level);
+			}, 800);
+
+			$timeout(function(){
+				self.progressEase = "easeInOutQuart";
+			}, 1600);
 		}else{
 			// COMPLETE LEVEL
 			completeLevel(level);
@@ -76,14 +86,25 @@ function($scope, $state, $timeout, roundProgressService, Game){
 
 	// SWIPER OPTIONS
 	$scope.levelsSliderOptionsa = {
-		onSlideChangeEnd: function(swiper){
+		speed: 150,
+		onTransitionEnd: function(swiper){
 			self.activeLevel = self.levels[swiper.activeIndex];
-			$scope.$digest();
+			$rootScope.bgColor = self.activeLevel.color;
+			$scope.$apply();
 		}
 	};
 
 	self.startGame = function(){
+		self.activeLevel = self.levels[self.swiper.activeIndex];
 		$state.go('gameboard', {levelId : self.activeLevel.id});
 	};
 
+	self.dashLength = function(level){
+		return (Math.PI * 200) / (level.maxScore / level.checkpointInterval) - 2;
+	};
+
 }]);
+
+
+
+

@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" ng-style="{'background-color': bgColor}">
 
 	<div class="block block-flex light" ng-click="vm.startGame()">
 		<p>Play</p>
@@ -25,7 +25,19 @@
 					bgcolor="#FFF"
 					stroke="10"
 					duration="800"
-					animation="easeInOutQuart">
+					animation="{{ vm.progressEase }}">
+					<circle
+						cx="100"
+						cy="100"
+						r="100"
+						fill="none"
+						stroke="#FFF"
+						stroke-width="5"
+						transform="rotate(-91,100,100)"
+						stroke-dasharray="2, {{ vm.dashLength(level) }}"
+						style="z-index: -1"
+						>
+					</circle>
 				</div>
 			</ion-slide-page>
 		</ion-slides>

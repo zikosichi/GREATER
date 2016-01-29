@@ -31,6 +31,8 @@ function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 			cache: false
 		});
 
+	// $ionicConfigProvider.views.transition('ios');
+
 	$urlRouterProvider.otherwise('/menu');
 
 	// $ionicConfigProvider.views.transition('none');

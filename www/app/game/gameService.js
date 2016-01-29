@@ -7,7 +7,9 @@ function($http, $q, Storage, $firebaseObject){
 		_levelsProgress: Storage.get('_levelsProgress') || [],
 		init: function(){
 
-			var self = this;
+			// Storage.clear();
+
+			/*var self = this;
 			self._loadData();
 			var deferred = $q.defer();
 			var ref = new Firebase("https://greatr.firebaseio.com/");
@@ -20,9 +22,9 @@ function($http, $q, Storage, $firebaseObject){
 
 				deferred.resolve(data);
 			});
-			return deferred.promise;
+			return deferred.promise;*/
 
-			/*var deferred = $q.defer();
+			var deferred = $q.defer();
 			var self = this;
 			self._loadData().then(function(response){
 
@@ -34,7 +36,7 @@ function($http, $q, Storage, $firebaseObject){
 			}, function(error){
 				deferred.resolve(error);
 			});
-			return deferred.promise;*/
+			return deferred.promise;
 		},
 		generateLevelQuestions: function(level){
 			var self = this;
@@ -96,8 +98,13 @@ function($http, $q, Storage, $firebaseObject){
 			self = this;
 			for (var i = 0; i < self._levelsProgress.length; i++) {
 				var index = _.findIndex(self.levels, 'id', self._levelsProgress[i].id);
-				angular.extend(self.levels[index], self._levelsProgress[i]);
-				// self.levels[index].currentScore = self._levelsProgress[i].currentScore;
+
+				self.levels[index].checkpointInterval = self._levelsProgress[i].checkpointInterval;
+				self.levels[index].currentScore = self._levelsProgress[i].currentScore;
+				self.levels[index].maxScore = self._levelsProgress[i].maxScore;
+				self.levels[index].status = self._levelsProgress[i].status;
+
+				// angular.extend(self.levels[index], self._levelsProgress[i]);
 			}
 
 		}

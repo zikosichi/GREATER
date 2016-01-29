@@ -422,7 +422,7 @@ angular.module('angular-svg-round-progress')
                         });
                     };
 
-                    var renderState = function(newValue, oldValue, preventAnimationOverride){
+                    var renderState = function(newValue, oldValue, preventAnimationOverride){                        
                         var max                 = service.toNumber(options.max || 0);
                         var end                 = newValue > 0 ? $window.Math.min(newValue, max) : 0;
                         var start               = (oldValue === end || oldValue < 0) ? 0 : (oldValue || 0); // fixes the initial animation
@@ -499,7 +499,7 @@ angular.module('angular-svg-round-progress')
 
                     // properties that are used during animation. some of these overlap with
                     // the ones that are used for presentation
-                    scope.$watchGroup(['current', 'max', 'animation', 'duration', 'radius', 'stroke', 'semi', 'offset'], function(newValue, oldValue){
+                    scope.$watchGroup(['current', 'max', 'duration', 'radius', 'stroke', 'semi', 'offset'], function(newValue, oldValue){
                         renderState(service.toNumber(newValue[0]), service.toNumber(oldValue[0]));
                     });
                 },
@@ -509,8 +509,8 @@ angular.module('angular-svg-round-progress')
                     var template = [
                         '<svg class="'+ directiveName +'" xmlns="http://www.w3.org/2000/svg">',
                             '<circle fill="none"/>',
-                            '<path fill="none"/>',
                             '<g ng-transclude></g>',
+                            '<path fill="none"/>',
                         '</svg>'
                     ];
 

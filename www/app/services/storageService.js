@@ -10,7 +10,7 @@ app.factory('Storage', ['$http', function($http){
 		remove: function(key){
 			localStorage.removeItem(key);
 		},
-		clear: function(key){
+		clear: function(){
 			localStorage.clear();
 		}
 

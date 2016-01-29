@@ -12,8 +12,11 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture){
 		this.currentScore     = 0;
 		this.levelQuestions = [];
 		this.level = _.find(Game.levels, 'id', parseInt($stateParams.levelId));
+		this.questionTime = this.level.questionTime;
+		this.questionTimeRate = 0.9;
 		this.levelQuestions = Game.generateLevelQuestions(this.level);
 
+		self.currentLvel = this.level;
 		self.currentQuestion = {};
 	}
 
@@ -26,7 +29,7 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture){
 	GamePlay.prototype.playQuestion = function(){
 		_this = this;
 		TweenMax.set(preloader, {width: "0%"});
-		this.timerAnimation = TweenMax.to(preloader, 4, {width: "100%", onComplete:function(){
+		this.timerAnimation = TweenMax.to(preloader, this.questionTime, {width: "100%", onComplete:function(){
 			_this.gameOver();
 			$scope.$digest();
 		}});
@@ -35,6 +38,7 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture){
 			// SUFFLE ANSWERS
 			self.currentQuestion[0] = self.currentQuestion.splice(1, 1, self.currentQuestion[0])[0];
 		}
+		this.questionTime *= this.questionTimeRate;
 	};
 
 	// NEXT QUESTION
@@ -67,21 +71,19 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture){
 		if (parseInt(self.currentQuestion[index].value) > parseInt(self.currentQuestion[index === 0 ? 1 : 0].value)) {
 			this.currentScore ++;
 			this.nextQuestion();
-			gamePlay.rippleAnimation(event.pageX, event.pageY, 0.5, 60, "#bedb39");
-			TweenMax.from('#block-' + index, 0.3, {backgroundColor: '#bedb39'});
+			gamePlay.rippleAnimation(event.pageX, event.pageY, 0.5, 50, "#bedb39");
+			TweenMax.from('#block-' + index, 0.3, {backgroundColor: '#bedb39', ease: Sine.easeInOut});
 		}else{
 			this.gameOver();
-			gamePlay.rippleAnimation(event.pageX, event.pageY, 0.5, 60, "red");
-			TweenMax.from('#block-' + index, 0.3, {backgroundColor: 'red'});
+			gamePlay.rippleAnimation(event.pageX, event.pageY, 0.5, 50, "red");
+			TweenMax.from('#block-' + index, 0.3, {backgroundColor: 'red', ease: Sine.easeInOut});
 		}
 	};
 
 	GamePlay.prototype.rippleAnimation = function(x, y, timing, scale, color){
 		var ripple 		  = document.querySelectorAll('.js-ripple'),
 			rippleContent = document.getElementById('ripple-content'),
-			tl            = new TimelineMax();
-			x             = x,
-			y             = y,
+			tl            = new TimelineMax(),
 			w             = rippleContent.offsetWidth,
 			h             = rippleContent.offsetHeight;
 
