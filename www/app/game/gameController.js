@@ -1,5 +1,5 @@
-app.controller('gameController', ['$scope', '$timeout', '$state', '$stateParams', 'Game', 'Storage', '$ionicGesture',
-function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture){
+app.controller('gameController', ['$scope', '$timeout', '$state', '$stateParams', 'Game', 'Storage', '$ionicGesture', 'Sound',
+function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture, Sound){
 
 	var self = this;
 	var gameboardWrapper = angular.element(document.querySelector("#gameboardWrapper"));
@@ -69,11 +69,13 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture){
 		TweenMax.set('#block-1' + index, {backgroundColor: 'transparent'});
 
 		if (parseInt(self.currentQuestion[index].value) > parseInt(self.currentQuestion[index === 0 ? 1 : 0].value)) {
+			Sound.correctAnswer();
 			this.currentScore ++;
 			this.nextQuestion();
 			gamePlay.rippleAnimation(event.pageX, event.pageY, 0.5, 50, "#bedb39");
 			TweenMax.from('#block-' + index, 0.3, {backgroundColor: '#bedb39', ease: Sine.easeInOut});
 		}else{
+			Sound.wrongtAnswer();
 			this.gameOver();
 			gamePlay.rippleAnimation(event.pageX, event.pageY, 0.5, 50, "red");
 			TweenMax.from('#block-' + index, 0.3, {backgroundColor: 'red', ease: Sine.easeInOut});

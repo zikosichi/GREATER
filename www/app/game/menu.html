@@ -7,7 +7,7 @@
 	<div class="block flex-block">
 
 		<ion-slides options="levelsSliderOptionsa" slider="slider" class="levels-slider">
-			<ion-slide-page ng-repeat="level in vm.levels" class="level-slide" test="arg">
+			<ion-slide-page ng-repeat="level in vm.levels" class="level-slide" test="arg" id="progress-{{level.id}}">
 				<div class="progress ng-cloak">
 					<div ng-if="level.status != 'locked'">
 						<h2> {{level.name}} </h2>
@@ -17,13 +17,19 @@
 						<i class="ion-android-lock"></i>
 					</div>
 				</div>
+				<div class="completed-wrapper">
+					<img ng-src="{{vm.randomCompliment.icon}}">
+					<p>{{vm.randomCompliment.text}}</p>
+				</div>
 				<div
 					round-progress
 					max="level.maxScore"
 					current="level.currentScore"
-					color="#81D4FA"
+					color="{{level.progressColor}}"
 					bgcolor="#FFF"
 					stroke="10"
+					offset="15"
+					radius="115"
 					duration="800"
 					animation="{{ vm.progressEase }}">
 					<circle
@@ -33,11 +39,12 @@
 						fill="none"
 						stroke="#FFF"
 						stroke-width="5"
-						transform="rotate(-91,100,100)"
+						stroke-linecap="round"
+						transform="translate(15,15) rotate(-91,100,100)"
 						stroke-dasharray="2, {{ vm.dashLength(level) }}"
-						style="z-index: -1"
 						>
-					</circle>
+						<!-- transform="rotate(-91,100,100)" -->
+					</circle>					
 				</div>
 			</ion-slide-page>
 		</ion-slides>
