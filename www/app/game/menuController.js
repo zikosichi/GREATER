@@ -40,20 +40,18 @@ function($scope, $state, $timeout, roundProgressService, Game, $rootScope, Sound
 				var index = _.findLastIndex(self.levels, 'status', 'unlocked'),
 					initialLevelIndex = index == -1 ? 0 : index;
 
-				self.swiper = swiper;				
-
-				console.log(initialLevelIndex);
+				self.swiper = swiper;
 
 				// ANIMATE LEVEL COMPLETE
-				$timeout(function(){
+				/*$timeout(function(){
 					animateLevelComplete(self.levels[0]);
-				}, 1000);
+				}, 1000);*/
 
 
 				//TIMEOUT IS TEMPORARY - WHILE USING FIREBASE
 				$timeout(function(){
-					// self.swiper.slideTo(initialLevelIndex, 1);
-				}, 100);
+					self.swiper.slideTo(initialLevelIndex, 1);
+				}, 1000);
 			}
 		});
 	}
@@ -94,7 +92,11 @@ function($scope, $state, $timeout, roundProgressService, Game, $rootScope, Sound
 				});
 			}, 1100);
 		}else{
-			console.log("GAME FINISHED :)");
+			$timeout(function(){
+				animateLevelComplete(level).then(function(){
+					console.log("GAME FINISHED :)");
+				});
+			}, 1100);
 		}
 	}
 
@@ -117,7 +119,6 @@ function($scope, $state, $timeout, roundProgressService, Game, $rootScope, Sound
 	function randomizeCompliment(){
 		// angular.extend(self.randomCompliment, self.compliment[Math.floor(Math.random() * self.compliment.length)]);
 		self.randomCompliment = self.compliment[Math.floor(Math.random() * self.compliment.length)];
-		console.log(self.randomCompliment);
 	}
 	randomizeCompliment();
 

@@ -6,7 +6,6 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture, S
 
 	/**** GAMEPLAY OBJECT ****/
 	function GamePlay(){
-		this.questionIndex  = 0;
 		this.preloader      = document.getElementById("preloader");
 		this.timerAnimation = null;
 		this.currentScore     = 0;
@@ -15,6 +14,7 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture, S
 		this.questionTime = this.level.questionTime;
 		this.questionTimeRate = 0.9;
 		this.levelQuestions = Game.generateLevelQuestions(this.level);
+		this.questionIndex  = this.level.shuffle ? 0 : this.level.currentScore % this.levelQuestions.length;
 
 		self.currentLvel = this.level;
 		self.currentQuestion = {};
@@ -45,10 +45,12 @@ function($scope, $timeout, $state, $stateParams, Game, Storage, $ionicGesture, S
 	GamePlay.prototype.nextQuestion = function(){
 		if (this.questionIndex < this.levelQuestions.length - 1) {
 			this.questionIndex++;
-			this.playQuestion();
 		}else{
-			this.gameOver();
+			_.shuffle(this.levelQuestions);
+			this.questionIndex = 0;
+			// this.gameOver();
 		}
+		this.playQuestion();
 	};
 
 	// GAME OVER

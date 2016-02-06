@@ -1,0 +1,88 @@
+{
+  "bank" : {
+    "types" : [ {
+      "questionsBlock" : [ [ [ {
+        "text" : "0",
+        "value" : 0
+      }, {
+        "text" : "0",
+        "value" : 0
+      } ], [ {
+        "text" : "0",
+        "value" : 0
+      }, {
+        "text" : "0",
+        "value" : 0
+      } ], [ {
+        "text" : "0",
+        "value" : 0
+      }, {
+        "text" : "0",
+        "value" : 0
+      } ], [ {
+        "text" : "0",
+        "value" : 0
+      }, {
+        "text" : "0",
+        "value" : 0
+      } ], [ {
+        "text" : "0",
+        "value" : 0
+      }, {
+        "text" : "0",
+        "value" : 0
+      } ] ], [ [ {
+        "text" : "0",
+        "value" : 0
+      }, {
+        "text" : "0",
+        "value" : 0
+      } ] ] ],
+      "type" : "Numbers"
+    } ]
+  },
+  "levels" : {
+    "levels" : [ {
+      "checkpointInterval" : "5",
+      "color" : "#4527A0",
+      "currentScore" : 0,
+      "id" : 1,
+      "maxScore" : "25",
+      "name" : "Level 1",
+      "progressColor" : "#B39DDB",
+      "questionTime" : "4",
+      "questionsFrom" : [ {
+        "text" : "Numbers"
+      } ],
+      "status" : "unlocked"
+    }, {
+      "checkpointInterval" : "3",
+      "color" : "#283593",
+      "currentScore" : 0,
+      "id" : 2,
+      "maxScore" : "30",
+      "name" : "Level 2",
+      "progressColor" : "#81D4FA",
+      "questionTime" : "4",
+      "questionsFrom" : [ {
+        "text" : "Romans"
+      } ],
+      "status" : "locked"
+    }, {
+      "checkpointInterval" : "10",
+      "color" : "#558B2F",
+      "currentScore" : 0,
+      "id" : 3,
+      "maxScore" : "50",
+      "name" : "Level 3",
+      "progressColor" : "#81D4FA",
+      "questionTime" : "4",
+      "questionsFrom" : [ {
+        "text" : "Numbers"
+      }, {
+        "text" : "Romans"
+      } ],
+      "status" : "locked"
+    } ]
+  }
+}

@@ -129,7 +129,15 @@ body{
 	
 }
 
-
+// SWIPER PAGINATION
+.swiper-pagination{
+	.swiper-pagination-bullet{
+		opacity: 0.15;
+		&.swiper-pagination-bullet-active{
+			opacity: 0.5;
+		}
+	}
+}
 
 
 

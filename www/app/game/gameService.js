@@ -9,7 +9,7 @@ function($http, $q, Storage, $firebaseObject){
 
 			// Storage.clear();
 
-			/*var self = this;
+			var self = this;
 			self._loadData();
 			var deferred = $q.defer();
 			var ref = new Firebase("https://greatr.firebaseio.com/");
@@ -22,9 +22,9 @@ function($http, $q, Storage, $firebaseObject){
 
 				deferred.resolve(data);
 			});
-			return deferred.promise;*/
+			return deferred.promise;
 
-			var deferred = $q.defer();
+			/*var deferred = $q.defer();
 			var self = this;
 			self._loadData().then(function(response){
 
@@ -36,19 +36,29 @@ function($http, $q, Storage, $firebaseObject){
 			}, function(error){
 				deferred.resolve(error);
 			});
-			return deferred.promise;
+			return deferred.promise;*/
 		},
 		generateLevelQuestions: function(level){
 			var self = this;
 			var levelQuestions = [];
-			for (var i = 0; i < level.questionsFrom.length; i++) {
-				for (var j = 0; j < self.questionsBank.length; j++) {
-					if (level.questionsFrom[i].text == self.questionsBank[j].type ) {
-						levelQuestions = levelQuestions.concat(self.questionsBank[j].questions);
-					}
-				}
+
+			var levelQuestionsFrom = _.filter(self.questionsBank, function(o) {
+				var k = _.findIndex(level.questionsFrom, { 'text': o.type });
+				return k !== -1;
+			});
+
+			_.forEach(levelQuestionsFrom, function(o){
+				_.forEach(o.questionsBlock, function(questionsBlock){
+					levelQuestions.push(questionsBlock[Math.floor(Math.random()*questionsBlock.length)]);
+				});
+			});
+
+			if (level.shuffle) {
+				return _.shuffle(levelQuestions);
+			}else{
+				return levelQuestions;				
 			}
-			return _.shuffle(levelQuestions);
+
 		},
 		unlockLevel: function(level){
 			level.status = "unlocked";
@@ -99,12 +109,10 @@ function($http, $q, Storage, $firebaseObject){
 			for (var i = 0; i < self._levelsProgress.length; i++) {
 				var index = _.findIndex(self.levels, 'id', self._levelsProgress[i].id);
 
-				self.levels[index].checkpointInterval = self._levelsProgress[i].checkpointInterval;
+				// self.levels[index].checkpointInterval = self._levelsProgress[i].checkpointInterval;
 				self.levels[index].currentScore = self._levelsProgress[i].currentScore;
-				self.levels[index].maxScore = self._levelsProgress[i].maxScore;
+				// self.levels[index].maxScore = self._levelsProgress[i].maxScore;
 				self.levels[index].status = self._levelsProgress[i].status;
-
-				// angular.extend(self.levels[index], self._levelsProgress[i]);
 			}
 
 		}
